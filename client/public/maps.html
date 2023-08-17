@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+
+  </head>
+<h1>Maps</h1>
+<div id="map" style="top: 20px;"></div>
+<h5>Note: Make sure to turn on location in windows settings and for phone make sure to <br> turn on gps otherwise it will show default location of ip</h5>
+<script>
+    navigator.geolocation.getCurrentPosition(position=>{
+        const {latitude, longitude}= position.coords;
+	    map.innerHTML = '<iframe width="500" height="500" src="https://maps.google.com/maps?q='+latitude+','+longitude+'&amp;z=15&amp;output=embed"></iframe>';
+var reqcount = 0;
+
+});
+</script>
+</html>
