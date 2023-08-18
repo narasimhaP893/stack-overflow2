@@ -1,13 +1,22 @@
 import Questions from '../models/Questions.js'
 import mongoose from 'mongoose'
+import User from '../models/auth.js'
 
 export const AskQuestion = async (req, res) => {
     const postQuestionData = req.body;
     const userId = req.userId;
     const postQuestion = new Questions({ ...postQuestionData, userId});
+    const { noOfQuestions, planOpted } = await User.findById(postQuestionData.userId)
+
     try {
-        await postQuestion.save();
-        res.status(200).json("Posted a question successfully")
+        if(noOfQuestions>0){
+            await postQuestion.save();
+            await User.findByIdAndUpdate(postQuestionData.userId,{$inc:{noOfQuestions:-1}})
+            res.status(200).json("Posted a question successfully")
+        }
+        else {
+            res.status(409).send("Per Day Question Limit reached")
+        }
     } catch (error) {
         console.log(error)
         res.status(409).json("Couldn't post a new question")        

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -6,13 +6,24 @@ import "./AskQuestion.css";
 import { askQuestion } from "../../actions/question";
 
 const AskQuestion = () => {
+  const User = useSelector((state) => state.currentUserReducer);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [questionTitle, setQuestionTitle] = useState("");
   const [questionBody, setQuestionBody] = useState("");
   const [questionTags, setQuestionTags] = useState("");
+  const [noOfQuestions, setNoOfQuestions] = useState(User.result.noOfQuestions)
 
-  const dispatch = useDispatch();
-  const User = useSelector((state) => state.currentUserReducer);
-  const navigate = useNavigate();
+  useEffect(() => {
+    const getNoOfQuestions = async() => {
+        // const { res: data } = await axios.post(process.env.REACT_APP_NODE_JS+'plans/getNoOfQuestions')
+        // console.log(data);
+        // setNoOfQuestions(data.noOfQuestions)
+    }
+    getNoOfQuestions()
+}, [])
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -69,7 +80,7 @@ const AskQuestion = () => {
                 }}
                 cols="30"
                 rows="10"
-                onKeyPress={handleEnter}
+                onKeyDown={handleEnter}
               ></textarea>
             </label>
             <label htmlFor="ask-ques-tags">

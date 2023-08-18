@@ -9,10 +9,16 @@ import DisplayQuestion from "./Pages/Questions/DisplayQuestion";
 import Tags from "./Pages/Tags/Tags";
 import Users from "./Pages/Users/Users";
 import UserProfile from "./Pages/UserProfile/UserProfile";
+
+import Plans from './Pages/Plans/Plans';
+import Success from './Pages/Plans/Success';
+import Failure from './Pages/Plans/Failure';
+import StripeForm from './Pages/Payment/StripeForm';
+
 import CommunityHome from "./Pages/Community/CommunityHome";
 import PostPage from "./Pages/PostPage/PostPage";
 import Otp from "./Pages/Otp/Otp";
-import Premium from "./Pages/Premium/Premium";
+//import Premium from "./Pages/Premium/Premium";
 
 const AllRoutes = () => {
   return (
@@ -25,10 +31,16 @@ const AllRoutes = () => {
       <Route path="/Tags" element={<Tags />} />
       <Route path="/Users" element={<Users />} />
       <Route path="/Otp" element={<Otp />} />
+
+
+      
       <Route path="/Users/:id" element={<UserProfile />} />
+      <Route path='/Plans' element={< Plans />}/>
+      <Route path='/Payment' element={< StripeForm />}/>
+      <Route path='/Success' element={< Success />}/>
+      <Route path='/Failure' element={< Failure />} />
       <Route path="/stackoverflow-community/post/:id" element={<PostPage />} />
       <Route path="/stackoverflow-community" element={<CommunityHome />} />
-      <Route path="/Premium" element={<Premium />} />
     </Routes>
   );
 };
