@@ -2,7 +2,7 @@ import axios from "axios";
 
 //https://stack-overflow-protyush-clone.onrender.com
 const API = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://stack-overflow-8vet.onrender.com",
 });
 
 API.interceptors.request.use((req) => {
