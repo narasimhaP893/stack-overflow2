@@ -88,9 +88,6 @@ const Navbar = () => {
           <Link to="/" className="nav-item nav-btn">
             For Teams
           </Link>
-          <Link to="/stackoverflow-community" className="nav-item nav-btn">
-            Community
-          </Link>
           <button className="nav-item nav-btn" onClick={handleClick}>
             Location
           </button>
