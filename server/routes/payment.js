@@ -11,7 +11,7 @@ const storeItems = {
 
 router.post("/purchasePlan", async (req, res) => {
 	try {
-		const stripe = new Stripe(process.env.STRIPE_PVT_KEY)
+		const stripe = new Stripe(`${process.env.STRIPE_PVT_KEY}`)
 		const plan = req.body.plan
 		const id = req.body.id
 		let flag = 0

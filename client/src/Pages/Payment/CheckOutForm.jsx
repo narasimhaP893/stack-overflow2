@@ -55,6 +55,7 @@ export default function CheckoutForm() {
     if (!stripe || !elements) {
       // Stripe.js has not yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
+      e.preventDefault()
       return;
     }
 
@@ -64,7 +65,7 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000",
+        return_url: "",
       },
     });
 

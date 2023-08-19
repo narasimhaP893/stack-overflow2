@@ -54,6 +54,24 @@ cron.schedule('* 38 0 * * *', () => {
   updatePlans()
 });
 
+app.post('/payment', async (req, res) => {
+  let status, error;
+  const { token, amount } = req.body;
+  try {
+    await Stripe.paymentIntents.create({
+      source: token.id,
+      amount,
+      currency: 'INR',
+    });
+    status = 'success';
+  } catch (error) {
+    console.log(error);
+    status = 'Failure';
+  }
+  res.json({ error, status });
+});
+
+
 const DATABASE_URL = process.env.CONNECTION_URL;
 
 mongoose
@@ -66,19 +84,4 @@ mongoose
   .catch((err) => console.log(err.message));
 
 
-  app.post('/payment', async (req, res) => {
-    let status, error;
-    const { token, amount } = req.body;
-    try {
-      await Stripe.paymentIntents.create({
-        source: token.id,
-        amount,
-        currency: 'INR',
-      });
-      status = 'success';
-    } catch (error) {
-      console.log(error);
-      status = 'Failure';
-    }
-    res.json({ error, status });
-  });
+  

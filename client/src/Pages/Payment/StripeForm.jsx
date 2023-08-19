@@ -5,7 +5,7 @@ import "./StripeForm.css";
 import CheckoutForm from "./CheckOutForm";
 import {useSelector} from 'react-redux'
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUB_KEY);
+const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUB_KEY}`);
 
 const StripeForm = (props) => {
     const [clientSecret, setClientSecret] = useState("");
@@ -13,8 +13,7 @@ const StripeForm = (props) => {
 
     useEffect(() => {
       // Create PaymentIntent as soon as the page loads
-        fetch(
-            "http://localhost:5000/payment/purchasePlan", {
+        fetch("https://stack-overflow-3h4g.onrender.com/payment/purchasePlan", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ plan: window.location.href.split('?')[1], id: user.result._id }),
